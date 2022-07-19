@@ -1,0 +1,11 @@
+body {
+  text-align: center;
+}
+
+.results-container {
+  display: none;
+}
+
+.fee {
+  display: block;
+}
