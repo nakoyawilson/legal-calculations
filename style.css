@@ -2,22 +2,8 @@
 
 body {
   font-family: "Montserrat", sans-serif;
-  text-align: center;
 }
 
-.results-container {
+#results-container {
   display: none;
-}
-
-.fee {
-  display: block;
-}
-
-input,
-button {
-  font-family: "Montserrat", sans-serif;
-}
-
-button {
-  font-weight: 600;
 }

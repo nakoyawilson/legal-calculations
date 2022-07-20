@@ -33,7 +33,7 @@ calculationForm.addEventListener("submit", (e) => {
   }
   document.querySelector("#value-of-estate").textContent = formattedEstateValue;
   calculationResults.textContent = feePayable;
-  document.querySelector(".results-container").style.display = "block";
+  document.querySelector("#results-container").style.display = "block";
   estateValueInput.value = "";
 });
 
