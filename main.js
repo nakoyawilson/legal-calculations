@@ -1,12 +1,17 @@
 const calculationForm = document.querySelector("#calculation-form");
 const calculationResults = document.querySelector("#result");
 const copyButton = document.querySelector("#copy-btn");
-const range = document.createRange();
-const selection = window.getSelection();
 
 calculationForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const estateValueInput = document.querySelector("#estate-value");
+  const formattedEstateValue = Number(estateValueInput.value)
+    .toFixed(2)
+    .split(".")
+    .map((num, idx) =>
+      idx === 0 ? num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : num
+    )
+    .join(".");
   const estateValue = Number(estateValueInput.value);
   let feePayable;
   if (estateValue < 50000) {
@@ -26,23 +31,16 @@ calculationForm.addEventListener("submit", (e) => {
   } else {
     feePayable = "Five Hundred Dollars ($500.00)";
   }
-  document.querySelector("#value-of-estate").textContent = estateValue;
+  document.querySelector("#value-of-estate").textContent = formattedEstateValue;
   calculationResults.textContent = feePayable;
   document.querySelector(".results-container").style.display = "block";
   estateValueInput.value = "";
 });
 
-const selectCopiedText = () => {
-  range.selectNodeContents(calculationResults);
-  selection.addRange(range);
-  setTimeout(() => {
-    selection.removeAllRanges();
-  }, 200);
-};
-
-const copyResults = () => {
+copyButton.addEventListener("click", () => {
   navigator.clipboard.writeText(calculationResults.textContent);
-  selectCopiedText();
-};
-
-copyButton.addEventListener("click", copyResults);
+  copyButton.textContent = "Copied!";
+  setTimeout(() => {
+    copyButton.textContent = "Copy Results";
+  }, 1000);
+});
