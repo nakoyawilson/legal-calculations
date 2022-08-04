@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schedule of Fees for Registratoin of Will Duties</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <main class="container-md">
+      <h1 class="text-center my-5 fw-semibold">
+        Schedule of Fees for Registratoin of Will Duties
+      </h1>
+      <form id="calculation-form">
+        <div class="row mb-3">
+          <label
+            for="estate-value"
+            class="col-sm-2 col-form-label col-form-label-lg"
+            >Value of Estate:</label
+          >
+          <div class="col-sm-10">
+            <input
+              type="number"
+              class="form-control form-control-lg"
+              id="estate-value"
+              step=".01"
+              placeholder="Value of Estate in numbers"
+              required
+            />
+          </div>
+        </div>
+        <div class="col text-center">
+          <button class="btn btn-lg btn-outline-primary fw-semibold">
+            Calculate Fee
+          </button>
+        </div>
+      </form>
+      <div class="mt-5 text-center" id="results-container">
+        <h2>
+          The registration fee for an estate with value of $<span
+            id="value-of-estate"
+          ></span>
+          is: <span id="result" class="d-block fw-bold my-3"></span>
+        </h2>
+        <button
+          id="copy-btn"
+          class="btn btn-lg btn-outline-primary fw-semibold"
+        >
+          Copy Results
+        </button>
+      </div>
+      <a href="/">Back</a>
+    </main>
+
+    <script src="../js/willduties.js"></script>
+  </body>
+</html>

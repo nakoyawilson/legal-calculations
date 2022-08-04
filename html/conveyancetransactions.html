@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legal Fees for Conveyance Transactions</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <main class="container-md">
+      <h1 class="text-center my-5 fw-semibold">
+        Legal Fees for Conveyance Transactions
+      </h1>
+      <form id="calculation-form">
+        <div class="row mb-3">
+          <label
+            for="property-value"
+            class="col-sm-2 col-form-label col-form-label-lg"
+            >Property Value:</label
+          >
+          <div class="col-sm-10">
+            <input
+              type="number"
+              class="form-control form-control-lg"
+              id="property-value"
+              step=".01"
+              placeholder="Value of Property in numbers"
+              required
+            />
+          </div>
+        </div>
+        <div class="row mb-3 d-flex align-items-center">
+          <p class="col-sm-2 col-form-label col-form-label-lg">Category:</p>
+          <div class="col-sm-10">
+            <input
+              type="radio"
+              name="category"
+              id="common-law"
+              class="form-check-input"
+              value="common law"
+            />
+            <label for="common-law" class="form-check-label"
+              >Common Law Conveyancing Transactions</label
+            >
+          </div>
+        </div>
+        <div class="col text-center">
+          <button class="btn btn-lg btn-outline-primary fw-semibold">
+            Calculate Fee
+          </button>
+        </div>
+      </form>
+      <div class="mt-5 text-center" id="results-container">
+        <h2>
+          The stamp duty payable for a property with value of $<span
+            id="value-of-property"
+          ></span>
+          is: <span id="result" class="d-block fw-bold my-3"></span>
+        </h2>
+        <button
+          id="copy-btn"
+          class="btn btn-lg btn-outline-primary fw-semibold"
+        >
+          Copy Results
+        </button>
+      </div>
+      <a href="/">Back</a>
+    </main>
+
+    <script src="../js/conveyancetransactions.js"></script>
+  </body>
+</html>
