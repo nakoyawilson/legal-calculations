@@ -27,6 +27,7 @@ calculationForm.addEventListener("submit", (e) => {
   let firstPercentage;
   let secondPercentage;
   let thirdPercentage;
+  const minFee = 400;
   if (category === "common law") {
     firstLimit = 100000;
     secondLimit = 500000;
@@ -36,11 +37,10 @@ calculationForm.addEventListener("submit", (e) => {
     thirdPercentage = 0.005;
   }
   if (propertyValue <= firstLimit) {
-    console.log(propertyValue);
     feePayable = `$${
-      propertyValue * firstPercentage > 400
+      propertyValue * firstPercentage > minFee
         ? formatNumber(propertyValue * firstPercentage)
-        : formatNumber(400)
+        : formatNumber(minFee)
     }`;
   } else if (propertyValue <= secondLimit) {
     let excess = propertyValue - firstLimit;
@@ -57,22 +57,6 @@ calculationForm.addEventListener("submit", (e) => {
   } else {
     feePayable = "See Schedule 3";
   }
-  // else if (propertyValue <= firstLimit) {
-  //   let excess = propertyValue - exemptValue;
-  //   feePayable = `$${formatNumber(excess * firstPercentage)}`;
-  // } else if (propertyValue <= secondLimit) {
-  //   let excess = propertyValue - firstLimit;
-  //   feePayable = `$${formatNumber(
-  //     (firstLimit - exemptValue) * firstPercentage + excess * secondPercentage
-  //   )}`;
-  // } else {
-  //   let excess = propertyValue - secondLimit;
-  //   feePayable = `$${formatNumber(
-  //     (firstLimit - exemptValue) * firstPercentage +
-  //       (secondLimit - firstLimit) * secondPercentage +
-  //       excess * thirdPercentage
-  //   )}`;
-  // }
   document.querySelector("#value-of-property").textContent =
     formattedPropertyValue;
   calculationResults.textContent = feePayable;
