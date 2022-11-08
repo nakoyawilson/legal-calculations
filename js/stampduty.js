@@ -20,6 +20,11 @@ calculationForm.addEventListener("submit", (e) => {
   ).value;
   const formattedPropertyValue = formatNumber(propertyValueInput.value);
   const propertyValue = Number(propertyValueInput.value);
+  const firstTimeOwner =
+    document.querySelector("input[name='first-time-owner']:checked").value ===
+    "yes"
+      ? true
+      : false;
   let feePayable;
   let exemptValue;
   let firstLimit;
@@ -28,9 +33,10 @@ calculationForm.addEventListener("submit", (e) => {
   let secondPercentage;
   let thirdPercentage;
   if (category === "residential house and land") {
-    exemptValue = 850000;
-    firstLimit = 1250000;
-    secondLimit = 1750000;
+    exemptValue = firstTimeOwner ? 1500000 : 850000;
+    firstLimit = exemptValue + 400000;
+    secondLimit = firstLimit + 500000;
+    console.log({ exemptValue, firstLimit, secondLimit });
     firstPercentage = 0.03;
     secondPercentage = 0.05;
     thirdPercentage = 0.075;
@@ -41,8 +47,20 @@ calculationForm.addEventListener("submit", (e) => {
     firstPercentage = 0.02;
     secondPercentage = 0.05;
     thirdPercentage = 0.07;
+  } else if (category === "non residential") {
+    firstLimit = 300000;
+    secondLimit = 400000;
+    firstPercentage = 0.02;
+    secondPercentage = 0.05;
+    thirdPercentage = 0.07;
   }
-  if (propertyValue <= exemptValue) {
+  if (category === "non residential" && propertyValue <= firstLimit) {
+    feePayable = `$${formatNumber(propertyValue * firstPercentage)}`;
+  } else if (category === "non residential" && propertyValue <= secondLimit) {
+    feePayable = `$${formatNumber(propertyValue * secondPercentage)}`;
+  } else if (category === "non residential" && propertyValue > secondLimit) {
+    feePayable = `$${formatNumber(propertyValue * thirdPercentage)}`;
+  } else if (propertyValue <= exemptValue) {
     feePayable = "Stamp Duty Exempt";
   } else if (propertyValue <= firstLimit) {
     let excess = propertyValue - exemptValue;

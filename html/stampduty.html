@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stamp Duty Rates - Residential</title>
+    <title>Stamp Duty Rates - Conveyances</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -16,7 +16,7 @@
   <body>
     <main class="container-md">
       <h1 class="text-center my-5 fw-semibold">
-        Stamp Duty Rates - Residential
+        Stamp Duty Rates - Conveyances
       </h1>
       <form id="calculation-form">
         <div class="row mb-3">
@@ -59,6 +59,37 @@
             <label for="res-land" class="form-check-label"
               >Residential (Land only)</label
             >
+            <input
+              type="radio"
+              name="category"
+              id="nrc"
+              class="form-check-input"
+              value="non residential"
+            />
+            <label for="nrc" class="form-check-label">Non Residential</label>
+          </div>
+        </div>
+        <div class="row mb-3 d-flex align-items-center">
+          <p class="col-sm-2 col-form-label col-form-label-lg">
+            First Time Homeowner(s)?:
+          </p>
+          <div class="col-sm-10">
+            <input
+              type="radio"
+              name="first-time-owner"
+              id="yes-first-time"
+              class="form-check-input"
+              value="yes"
+            />
+            <label for="yes-first-time" class="form-check-label">Yes</label>
+            <input
+              type="radio"
+              name="first-time-owner"
+              id="not-first-time"
+              class="form-check-input"
+              value="no"
+            />
+            <label for="not-first-time" class="form-check-label">No</label>
           </div>
         </div>
         <div class="col text-center">
