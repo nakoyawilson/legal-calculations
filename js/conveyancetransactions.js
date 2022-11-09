@@ -18,6 +18,15 @@ calculationForm.addEventListener("submit", (e) => {
   const category = document.querySelector(
     "input[name='category']:checked"
   ).value;
+  const titleInvestigated =
+    document.querySelector("input[name='title-investigated']:checked").value ===
+    "yes"
+      ? true
+      : false;
+  const oboPurchaser =
+    document.querySelector("input[name='obo']:checked").value === "purchaser"
+      ? true
+      : false;
   const formattedPropertyValue = formatNumber(propertyValueInput.value);
   const propertyValue = Number(propertyValueInput.value);
   let feePayable;
@@ -32,9 +41,27 @@ calculationForm.addEventListener("submit", (e) => {
     firstLimit = 100000;
     secondLimit = 500000;
     thirdLimit = 20000000;
-    firstPercentage = 0.015;
-    secondPercentage = 0.0075;
-    thirdPercentage = 0.005;
+    firstPercentage =
+      titleInvestigated && oboPurchaser
+        ? 0.015
+        : (!titleInvestigated && oboPurchaser) ||
+          (titleInvestigated && !oboPurchaser)
+        ? 0.0075
+        : 0.00375;
+    secondPercentage =
+      titleInvestigated && oboPurchaser
+        ? 0.0075
+        : (!titleInvestigated && oboPurchaser) ||
+          (titleInvestigated && !oboPurchaser)
+        ? 0.00375
+        : 0.001875;
+    thirdPercentage =
+      titleInvestigated && oboPurchaser
+        ? 0.005
+        : (!titleInvestigated && oboPurchaser) ||
+          (titleInvestigated && !oboPurchaser)
+        ? 0.0025
+        : 0.00125;
   }
   if (propertyValue <= firstLimit) {
     feePayable = `$${
