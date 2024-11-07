@@ -14,19 +14,19 @@ calculationForm.addEventListener("submit", (e) => {
     .join(".");
   const estateValue = Number(estateValueInput.value);
   let feePayable;
-  if (estateValue < 50000) {
+  if (estateValue <= 50000) {
     feePayable = "Twenty-Five Dollars ($25.00)";
-  } else if (estateValue < 100000) {
+  } else if (estateValue <= 100000) {
     feePayable = "Fifty Dollars ($50.00)";
-  } else if (estateValue < 250000) {
+  } else if (estateValue <= 250000) {
     feePayable = "Seventy-Five Dollars ($75.00)";
-  } else if (estateValue < 400000) {
+  } else if (estateValue <= 400000) {
     feePayable = "One Hundred Dollars ($100.00)";
-  } else if (estateValue < 500000) {
+  } else if (estateValue <= 500000) {
     feePayable = "Two Hundred Dollars ($200.00)";
-  } else if (estateValue < 750000) {
+  } else if (estateValue <= 750000) {
     feePayable = "Three Hundred Dollars ($300.00)";
-  } else if (estateValue < 1000000) {
+  } else if (estateValue <= 1000000) {
     feePayable = "Four Hundred Dollars ($400.00)";
   } else {
     feePayable = "Five Hundred Dollars ($500.00)";
