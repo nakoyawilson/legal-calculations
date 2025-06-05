@@ -1,125 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Legal Fees for Conveyance Transactions</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="../css/style.css" />
-  </head>
-  <body>
-    <main class="container-md">
-      <h1 class="text-center my-5 fw-semibold">
-        Legal Fees for Conveyance Transactions
-      </h1>
-      <form id="calculation-form">
-        <div class="row mb-3">
-          <label
-            for="property-value"
-            class="col-sm-2 col-form-label col-form-label-lg"
-            >Property Value:</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="number"
-              class="form-control form-control-lg"
-              id="property-value"
-              step=".01"
-              placeholder="Value of Property in numbers"
-              required
-            />
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal Fees for Conveyance Transactions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+  <main class="container-md">
+    <h1 class="text-center my-5 fw-semibold">
+      Legal Fees for Conveyance Transactions
+    </h1>
+    <form id="calculation-form">
+      <div class="row mb-3">
+        <label for="property-value" class="col-sm-2 col-form-label col-form-label-lg">Property Value:</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control form-control-lg" id="property-value" step=".01"
+            placeholder="Value of Property in numbers" required />
         </div>
-        <div class="row mb-3 d-flex align-items-center">
-          <p class="col-sm-2 col-form-label col-form-label-lg">Category:</p>
-          <div class="col-sm-10">
-            <input
-              type="radio"
-              name="category"
-              id="common-law"
-              class="form-check-input"
-              value="common law"
-            />
-            <label for="common-law" class="form-check-label"
-              >Common Law Conveyancing Transactions</label
-            >
-          </div>
-          <div class="row mb-3 d-flex align-items-center">
-            <p class="col-sm-2 col-form-label col-form-label-lg">
-              Title investigated?:
-            </p>
-            <div class="col-sm-10">
-              <input
-                type="radio"
-                name="title-investigated"
-                id="yes-investigated"
-                class="form-check-input"
-                value="yes"
-              />
-              <label for="yes-investigated" class="form-check-label">Yes</label>
-              <input
-                type="radio"
-                name="title-investigated"
-                id="not-investigated"
-                class="form-check-input"
-                value="no"
-              />
-              <label for="not-investigated" class="form-check-label">No</label>
-            </div>
-          </div>
-          <div class="row mb-3 d-flex align-items-center">
-            <p class="col-sm-2 col-form-label col-form-label-lg">
-              On behalf of?:
-            </p>
-            <div class="col-sm-10">
-              <input
-                type="radio"
-                name="obo"
-                id="vendor"
-                class="form-check-input"
-                value="vendor"
-              />
-              <label for="vendor" class="form-check-label">Vendor</label>
-              <input
-                type="radio"
-                name="obo"
-                id="purchaser"
-                class="form-check-input"
-                value="purchaser"
-              />
-              <label for="purchaser" class="form-check-label">Purchaser</label>
-            </div>
-          </div>
+      </div>
+      <div class="row mb-3 d-flex align-items-center">
+        <p class="col-sm-2 col-form-label col-form-label-lg">Category:</p>
+        <div class="col-sm-10">
+          <input type="radio" name="category" id="common-law" class="form-check-input" value="common law" />
+          <label for="common-law" class="form-check-label">Common Law Conveyancing Transactions</label>
+          <input type="radio" name="category" id="rpa" class="form-check-input" value="real property act" />
+          <label for="rpa" class="form-check-label">Transactions under the Real Property Act</label>
         </div>
-        <div class="col text-center">
-          <button class="btn btn-lg btn-outline-primary fw-semibold">
-            Calculate Fee
-          </button>
+      </div>
+      <div class="row mb-3 d-flex align-items-center">
+        <p class="col-sm-2 col-form-label col-form-label-lg">Deed/Instrument Type:</p>
+        <div class="col-sm-10">
+          <input type="radio" name="deed-instrument-type" id="assent" class="form-check-input" value="assent" />
+          <label for="assent" class="form-check-label">Assent</label>
+          <input type="radio" name="deed-instrument-type" id="conveyance" class="form-check-input" value="conveyance" />
+          <label for="conveyance" class="form-check-label">Conveyance</label>
+          <input type="radio" name="deed-instrument-type" id="gift" class="form-check-input" value="gift" />
+          <label for="gift" class="form-check-label">Gift</label>
+          <input type="radio" name="deed-instrument-type" id="transfer" class="form-check-input" value="transfer" />
+          <label for="transfer" class="form-check-label">Transfer</label>
         </div>
-      </form>
-      <div class="mt-5 text-center" id="results-container">
-        <h2>
-          The legal fees payable for a property with value of $<span
-            id="value-of-property"
-          ></span>
-          is: <span id="result" class="d-block fw-bold my-3"></span>
-        </h2>
-        <button
-          id="copy-btn"
-          class="btn btn-lg btn-outline-primary fw-semibold"
-        >
-          Copy Results
+      </div>
+      <div class="row mb-3 align-items-center">
+        <p class="col-sm-2 col-form-label col-form-label-lg">
+          Scope of Work:
+        </p>
+        <div class="col-sm-10">
+          <input type="radio" name="scope" id="preparing" class="form-check-input" value="preparing" checked />
+          <label for="preparing" class="form-check-label">Preparing</label>
+          <input type="radio" name="scope" id="revising" class="form-check-input" value="revising" />
+          <label for="revising" class="form-check-label">Revising</label>
+        </div>
+      </div>
+      <div class="row mb-3 align-items-center">
+        <p class="col-sm-2 col-form-label col-form-label-lg">
+          Title investigated?:
+        </p>
+        <div class="col-sm-10">
+          <input type="radio" name="title-investigated" id="yes-investigated" class="form-check-input" value="yes"
+            checked />
+          <label for="yes-investigated" class="form-check-label">Yes</label>
+          <input type="radio" name="title-investigated" id="not-investigated" class="form-check-input" value="no" />
+          <label for="not-investigated" class="form-check-label">No</label>
+        </div>
+      </div>
+      <div class="col text-center">
+        <button class="btn btn-lg btn-outline-primary fw-semibold">
+          Calculate Fee
         </button>
       </div>
-      <a href="../index.html">Back</a>
-    </main>
+    </form>
+    <div class="mt-5 text-center" id="results-container">
+      <h2>
+        The legal fees payable for a property with value of $<span id="value-of-property"></span>
+        is: <span id="result" class="d-block fw-bold my-3"></span>
+      </h2>
+      <button id="copy-btn" class="btn btn-lg btn-outline-primary fw-semibold">
+        Copy Results
+      </button>
+    </div>
+    <a href="../index.html">Back</a>
+  </main>
 
-    <script src="../js/conveyancetransactions.js"></script>
-  </body>
+  <script src="../js/conveyancetransactions.js"></script>
+</body>
+
 </html>
