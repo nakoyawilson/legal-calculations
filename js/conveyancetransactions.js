@@ -18,13 +18,14 @@ calculationForm.addEventListener("submit", (e) => {
   const category = document.querySelector(
     "input[name='category']:checked"
   ).value;
+  const deedInstrumentType = document.querySelector(
+    "input[name='deed-instrument-type']:checked"
+  ).value;
+  const scope =
+    document.querySelector("input[name='scope']:checked").value;
   const titleInvestigated =
     document.querySelector("input[name='title-investigated']:checked").value ===
-    "yes"
-      ? true
-      : false;
-  const oboPurchaser =
-    document.querySelector("input[name='obo']:checked").value === "purchaser"
+      "yes"
       ? true
       : false;
   const formattedPropertyValue = formatNumber(propertyValueInput.value);
@@ -36,53 +37,65 @@ calculationForm.addEventListener("submit", (e) => {
   let firstPercentage;
   let secondPercentage;
   let thirdPercentage;
-  const minFee = 400;
+  const minFee = category === "common law" ? 400 : category === "real property act" ? 500 : 0;
   if (category === "common law") {
     firstLimit = 100000;
     secondLimit = 500000;
     thirdLimit = 20000000;
     firstPercentage =
-      titleInvestigated && oboPurchaser
+      titleInvestigated && scope === "preparing" && (deedInstrumentType === "conveyance" || deedInstrumentType === "gift")
         ? 0.015
-        : (!titleInvestigated && oboPurchaser) ||
-          (titleInvestigated && !oboPurchaser)
-        ? 0.0075
-        : 0.00375;
+        : (!titleInvestigated && scope === "preparing" && (deedInstrumentType === "conveyance" || deedInstrumentType === "gift")) ||
+          (titleInvestigated && scope === "revising" && deedInstrumentType === "conveyance") || deedInstrumentType === "assent"
+          ? 0.0075
+          : 0.00375;
     secondPercentage =
-      titleInvestigated && oboPurchaser
+      titleInvestigated && scope === "preparing" && (deedInstrumentType === "conveyance" || deedInstrumentType === "gift")
         ? 0.0075
-        : (!titleInvestigated && oboPurchaser) ||
-          (titleInvestigated && !oboPurchaser)
-        ? 0.00375
-        : 0.001875;
+        : (!titleInvestigated && scope === "preparing" && (deedInstrumentType === "conveyance" || deedInstrumentType === "gift")) ||
+          (titleInvestigated && scope === "revising" && deedInstrumentType === "conveyance") || deedInstrumentType === "assent"
+          ? 0.00375
+          : 0.001875;
     thirdPercentage =
-      titleInvestigated && oboPurchaser
+      titleInvestigated && scope === "preparing" && (deedInstrumentType === "conveyance" || deedInstrumentType === "gift")
         ? 0.005
-        : (!titleInvestigated && oboPurchaser) ||
-          (titleInvestigated && !oboPurchaser)
-        ? 0.0025
-        : 0.00125;
+        : (!titleInvestigated && scope === "preparing" && (deedInstrumentType === "conveyance" || deedInstrumentType === "gift")) ||
+          (titleInvestigated && scope === "revising" && deedInstrumentType === "conveyance") || deedInstrumentType === "assent"
+          ? 0.0025
+          : 0.00125;
+  } else if (category === "real property act") {
+    firstLimit = 25000;
   }
-  if (propertyValue <= firstLimit) {
-    feePayable = `$${
-      propertyValue * firstPercentage > minFee
-        ? formatNumber(propertyValue * firstPercentage)
-        : formatNumber(minFee)
-    }`;
-  } else if (propertyValue <= secondLimit) {
-    let excess = propertyValue - firstLimit;
+  if (propertyValue <= firstLimit && category === "common law") {
+    feePayable = `$${propertyValue * firstPercentage > minFee
+      ? formatNumber(propertyValue * firstPercentage)
+      : formatNumber(minFee)
+      }`;
+  } else if (propertyValue <= secondLimit && category === "common law") {
+    const excess = propertyValue - firstLimit;
     feePayable = `$${formatNumber(
       firstLimit * firstPercentage + excess * secondPercentage
     )}`;
-  } else if (propertyValue <= thirdLimit) {
-    let excess = propertyValue - secondLimit;
+  } else if (propertyValue <= thirdLimit && category === "common law") {
+    const excess = propertyValue - secondLimit;
     feePayable = `$${formatNumber(
       firstLimit * firstPercentage +
-        (secondLimit - firstLimit) * secondPercentage +
-        excess * thirdPercentage
+      (secondLimit - firstLimit) * secondPercentage +
+      excess * thirdPercentage
     )}`;
-  } else {
+  } else if (propertyValue > thirdLimit && category === "common law") {
     feePayable = "See Schedule 3";
+  } else if (propertyValue <= firstLimit && category === "real property act") {
+    const scopeMultiplier = scope === "preparing" ? 1 : 0.25;
+    const deedInstrumentTypeMultiplier = deedInstrumentType === "transfer" ? 1 : 0.5;
+    feePayable = `$${formatNumber(minFee * scopeMultiplier * deedInstrumentTypeMultiplier)}`;
+  } else if (propertyValue > firstLimit && category === "real property act") {
+    const scopeMultiplier = scope === "preparing" ? 1 : 0.25;
+    const deedInstrumentTypeMultiplier = deedInstrumentType === "transfer" ? 1 : 0.5;
+    const excess = propertyValue - firstLimit;
+    feePayable = `$${formatNumber(
+      (minFee + ((excess / 5000) * 30)) * scopeMultiplier * deedInstrumentTypeMultiplier
+    )}`;
   }
   document.querySelector("#value-of-property").textContent =
     formattedPropertyValue;
